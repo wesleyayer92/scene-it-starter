@@ -14,3 +14,7 @@ body {
 	margin-top: 20px;
 }
 
+#movies-container {
+	display: flex;
+	flex-flow: row wrap;
+}

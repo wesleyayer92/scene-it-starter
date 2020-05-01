@@ -1,3 +1,4 @@
+
 const moviesContainer = document.getElementById('movies-container');
 // function saveToWatchlist(movieId) {
 //   const movie = movieData.find(currentMovie => currentMovie.imdbID == movieId);
@@ -34,7 +35,11 @@ myForm.addEventListener('submit', e => {
     const searchString = document.querySelector('input').value;
     const urlEncodedSearchString = encodeURIComponent(searchString);
     axios.get(`http://www.omdbapi.com/?apikey=b43843a0&s=${urlEncodedSearchString}`)
-          .then(r => moviesContainer.innerHTML = renderMovies(r.data.Search));
+          .then(r => {
+            movieData = r.data.Search;
+            moviesContainer.innerHTML = renderMovies(r.data.Search);
+            return movieData;
+          });
     function renderMovies(movieArray) {
         let movieHtmlArray = movieArray.map(movie => {
             return `<div class="movie card" style="width: 18rem;">
@@ -48,5 +53,5 @@ myForm.addEventListener('submit', e => {
         });
         return movieHtmlArray.join(``);
     }
-    moviesContainer.innerHTML = renderMovies(movieData);
+    // moviesContainer.innerHTML = renderMovies(movieData);
 })
